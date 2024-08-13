@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface MenuService {
 
-	List<String> getDrinks(String menuObj);
+	List<String> getDrinks(String menuObj) throws Throwable;
 
 }

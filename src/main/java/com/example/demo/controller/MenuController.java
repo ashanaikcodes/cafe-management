@@ -20,15 +20,15 @@ public class MenuController {
 	private MenuService menuService;
 	
 	@GetMapping("/{drinks}")
-    public List<String> getDrinks(@PathVariable String drinks) throws ApplicationException {
+    public List<String> getDrinks(@PathVariable String drinks) throws Throwable{
 		List<String> response = new ArrayList<>();
 //		try {
 			response = menuService.getDrinks(drinks);
-			if(response.isEmpty()) {
-				throw new ApplicationException("Drinks not found", "Please check the inventory");
-			}
+//			if(response.isEmpty()) {
+//				throw new ApplicationException("Drinks not found", "Please check the inventory");
+//			}
 //		} catch (ApplicationException e) {
-//			throw new ApplicationException("Drinks not found", e.getErrorMessage());
+//			throw new ApplicationException("Drinks not found", e.getMessage());
 //		}
         return response;
     }
