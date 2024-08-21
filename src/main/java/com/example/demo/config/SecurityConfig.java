@@ -28,6 +28,7 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
         http
                 .authorizeHttpRequests(requests -> requests
+                		.requestMatchers("/actuator/**").hasRole("ACTUATOR")
                         .anyRequest().authenticated())
                 .httpBasic(withDefaults());
         return http.build();
@@ -41,8 +42,9 @@ public class SecurityConfig {
 		UserDetails admin = User.withUsername("Ash").password(encoder.encode("123")).roles("ADMIN", "USER").build();
 
 		UserDetails user = User.withUsername("Naik").password(encoder.encode("123")).roles("USER").build();
+		UserDetails actuator = User.builder().username("Actuator").password(encoder.encode("123")).roles("ACTUATOR").build();
 
-		return new InMemoryUserDetailsManager(admin, user);
+		return new InMemoryUserDetailsManager(admin, user, actuator);
 	}
 
 	// Configuring HttpSecurity
